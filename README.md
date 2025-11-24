@@ -177,9 +177,9 @@ Edit `appsettings.json`:
 ```json
 {
   "JwtSettings": {
-    "SecretKey": "YourSuperSecretKeyThatIsAtLeast32CharactersLong!",
+    "SecretKey": "iK4f8RzQ0mV9B1nT7pX2sD6wH3uY5aLc",
     "Issuer": "CurrencyExchangeAPI",
-    "Audience": "CurrencyExchangeUsers",
+    "Audience": "CurrencyExchangeAPI",
     "ExpirationMinutes": 60
   }
 }
