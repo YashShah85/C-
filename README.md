@@ -10,7 +10,7 @@ A RESTful API for currency conversion to Danish Krone (DKK) with real-time excha
 
 ## Quick Start
 
-### 1 Start SQL Server with Docker (skip to next step if using SQL Server locally)
+### 1. Start SQL Server with Docker (skip to next step if using SQL Server locally)
 
 ```bash
 docker-compose up -d
@@ -28,7 +28,7 @@ If using a different SQL Server instance, update `appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=CurrencyExchangeDb;User Id=sa;Password=Passw0rd@123;TrustServerCertificate=True;"
+    "DefaultConnection": "Server=localhost;Database=CurrencyExchangeDb;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;"
   }
 }
 ```
@@ -51,8 +51,7 @@ dotnet run
 
 The API will be available at:
 - **HTTP**: `http://localhost:5129`
-- **HTTPS**: `https://localhost:5129`
-- **Swagger UI**: `https://localhost:5129/`
+- **Swagger UI**: `http://localhost:5129/`
 
 ## API Endpoints
 
