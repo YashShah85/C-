@@ -165,8 +165,8 @@ Response:
 
 Query Parameters:
 - `fromCurrency` (optional): Filter by source currency
-- `fromDate` (optional): Filter from date (ISO 8601)
-- `toDate` (optional): Filter to date (ISO 8601)
+- `fromDate` (optional): Filter from date
+- `toDate` (optional): Filter to date
 
 ## Configuration
 
@@ -234,26 +234,7 @@ Test coverage:
 - Currency conversion service logic
 - Edge cases and error handling
 
-## External API
-
-The API fetches exchange rates from **Danmarks Nationalbank**:
-- **URL**: `https://www.nationalbanken.dk/api/currencyratexmlapi`
-- **Format**: XML
-- **Update Frequency**: Daily (weekdays)
-
-### Supported Currencies
-
-All currencies published by Nationalbanken are supported. Common examples:
-- USD (US Dollar)
-- EUR (Euro)
-- GBP (British Pound)
-- JPY (Japanese Yen)
-- CHF (Swiss Franc)
-- SEK (Swedish Krona)
-- NOK (Norwegian Krone)
-- And many more...
-
-### Migration Issues
+## Migration Issues
 
 Reset database:
 ```bash
