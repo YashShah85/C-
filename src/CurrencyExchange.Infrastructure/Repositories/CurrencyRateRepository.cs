@@ -8,7 +8,6 @@ namespace CurrencyExchange.Infrastructure.Repositories;
 
 /// <summary>
 /// SQL Server repository implementation for CurrencyRate
-/// Follows Repository Pattern and Interface Segregation Principle (ISP)
 /// </summary>
 public class CurrencyRateRepository : ICurrencyRateRepository
 {
@@ -78,7 +77,6 @@ public class CurrencyRateRepository : ICurrencyRateRepository
 
             if (existingRate != null)
             {
-                // Update existing rate
                 existingRate.UpdateRate(rate.RateToDKK);
                 existingRate.CurrencyName = rate.CurrencyName;
                 existingRate.FetchedAt = rate.FetchedAt;
@@ -86,7 +84,6 @@ public class CurrencyRateRepository : ICurrencyRateRepository
             }
             else
             {
-                // Add new rate
                 _context.CurrencyRates.Add(rate);
             }
 

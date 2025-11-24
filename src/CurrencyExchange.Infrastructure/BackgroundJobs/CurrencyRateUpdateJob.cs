@@ -6,7 +6,6 @@ namespace CurrencyExchange.Infrastructure.BackgroundJobs;
 
 /// <summary>
 /// Scheduled job to update currency rates every 60 minutes
-/// Uses Quartz.NET for reliable job scheduling
 /// </summary>
 [DisallowConcurrentExecution]
 public class CurrencyRateUpdateJob : IJob
@@ -39,7 +38,6 @@ public class CurrencyRateUpdateJob : IJob
         {
             _logger.LogError(ex, "Error executing currency rate update job");
             
-            // Rethrow to let Quartz handle retry logic
             throw new JobExecutionException(ex, refireImmediately: false);
         }
     }

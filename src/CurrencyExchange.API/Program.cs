@@ -8,7 +8,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
-// Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(new ConfigurationBuilder()
         .AddJsonFile("appsettings.json")
@@ -24,14 +23,11 @@ try
 
     var builder = WebApplication.CreateBuilder(args);
 
-    // Add Serilog
     builder.Host.UseSerilog();
 
-    // Add services to the container
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
 
-    // Configure Swagger/OpenAPI with JWT support
     builder.Services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo
@@ -42,11 +38,10 @@ try
             Contact = new OpenApiContact
             {
                 Name = "Currency Exchange API",
-                Email = "support@currencyexchange.com"
+                Email = ""
             }
         });
 
-        // Add JWT authentication to Swagger
         c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
         {
             Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token",
@@ -71,7 +66,6 @@ try
             }
         });
 
-        // Include XML comments if available
         var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
         var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
         if (File.Exists(xmlPath))
@@ -80,7 +74,6 @@ try
         }
     });
 
-    // Add JWT Authentication
     var jwtSettings = builder.Configuration.GetSection("JwtSettings");
     var secretKey = jwtSettings["SecretKey"] ?? "YourSuperSecretKeyForJWTTokenGeneration123456";
 
@@ -105,7 +98,6 @@ try
 
     builder.Services.AddAuthorization();
 
-    // Add CORS
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowAll",
@@ -115,24 +107,21 @@ try
                 .AllowAnyHeader());
     });
 
-    // Register Application and Infrastructure services
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
 
     var app = builder.Build();
 
-    // Configure the HTTP request pipeline
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI(c =>
         {
             c.SwaggerEndpoint("/swagger/v1/swagger.json", "Currency Exchange API v1");
-            c.RoutePrefix = string.Empty; // Serve Swagger UI at root
+            c.RoutePrefix = string.Empty; 
         });
     }
 
-    // Run database migrations automatically
     using (var scope = app.Services.CreateScope())
     {
         var services = scope.ServiceProvider;

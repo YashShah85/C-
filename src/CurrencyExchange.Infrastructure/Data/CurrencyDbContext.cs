@@ -19,7 +19,6 @@ public class CurrencyDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Configure CurrencyRate entity
         modelBuilder.Entity<CurrencyRate>(entity =>
         {
             entity.ToTable("CurrencyRates");
@@ -42,17 +41,14 @@ public class CurrencyDbContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .IsRequired();
 
-            // Create unique index on CurrencyCode for efficient lookups
             entity.HasIndex(e => e.CurrencyCode)
                 .IsUnique()
                 .HasDatabaseName("IX_CurrencyRates_CurrencyCode");
 
-            // Create index on FetchedAt for time-based queries
             entity.HasIndex(e => e.FetchedAt)
                 .HasDatabaseName("IX_CurrencyRates_FetchedAt");
         });
 
-        // Configure CurrencyConversion entity
         modelBuilder.Entity<CurrencyConversion>(entity =>
         {
             entity.ToTable("CurrencyConversions");
@@ -78,15 +74,12 @@ public class CurrencyDbContext : DbContext
             entity.Property(e => e.ConversionDate)
                 .IsRequired();
 
-            // Create index on FromCurrency for filtering
             entity.HasIndex(e => e.FromCurrency)
                 .HasDatabaseName("IX_CurrencyConversions_FromCurrency");
 
-            // Create index on ConversionDate for date range queries
             entity.HasIndex(e => e.ConversionDate)
                 .HasDatabaseName("IX_CurrencyConversions_ConversionDate");
 
-            // Create composite index for common query patterns
             entity.HasIndex(e => new { e.FromCurrency, e.ConversionDate })
                 .HasDatabaseName("IX_CurrencyConversions_FromCurrency_ConversionDate");
         });

@@ -6,7 +6,6 @@ namespace CurrencyExchange.Application;
 
 /// <summary>
 /// Extension method for registering application services
-/// Follows Open/Closed Principle (OCP) for extension
 /// </summary>
 public static class DependencyInjection
 {

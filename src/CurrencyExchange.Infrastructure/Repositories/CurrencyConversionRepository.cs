@@ -8,7 +8,6 @@ namespace CurrencyExchange.Infrastructure.Repositories;
 
 /// <summary>
 /// SQL Server repository implementation for CurrencyConversion
-/// Follows Repository Pattern
 /// </summary>
 public class CurrencyConversionRepository : ICurrencyConversionRepository
 {

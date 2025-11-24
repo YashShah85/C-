@@ -9,7 +9,6 @@ namespace CurrencyExchange.Application.Services;
 
 /// <summary>
 /// Service for handling currency conversion operations
-/// Follows Single Responsibility Principle (SRP) and Dependency Inversion Principle (DIP)
 /// </summary>
 public class CurrencyConversionService : ICurrencyConversionService
 {
@@ -36,13 +35,11 @@ public class CurrencyConversionService : ICurrencyConversionService
             request.Amount, 
             request.FromCurrency);
 
-        // Validate input
         if (request.Amount <= 0)
             throw new InvalidConversionException("Amount must be greater than zero");
 
         var currencyCode = request.FromCurrency.ToUpperInvariant();
 
-        // Special case: if converting from DKK to DKK
         if (currencyCode == "DKK")
         {
             var dkkConversion = new ConversionResponseDto
@@ -55,19 +52,16 @@ public class CurrencyConversionService : ICurrencyConversionService
                 ConversionDate = DateTime.UtcNow
             };
 
-            // Still save the conversion
             await SaveConversionAsync(dkkConversion, cancellationToken);
 
             return dkkConversion;
         }
 
-        // Get exchange rate from database
         var rate = await _rateRepository.GetByCurrencyCodeAsync(currencyCode, cancellationToken);
 
         if (rate == null)
             throw new CurrencyNotFoundException(currencyCode);
 
-        // Calculate converted amount
         var convertedAmount = request.Amount * rate.RateToDKK;
 
         var response = new ConversionResponseDto
@@ -80,7 +74,6 @@ public class CurrencyConversionService : ICurrencyConversionService
             ConversionDate = DateTime.UtcNow
         };
 
-        // Save conversion to database
         await SaveConversionAsync(response, cancellationToken);
 
         _logger.LogInformation(

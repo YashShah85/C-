@@ -9,7 +9,6 @@ namespace CurrencyExchange.Application.Services;
 
 /// <summary>
 /// Service for handling currency rate operations
-/// Follows Single Responsibility Principle (SRP)
 /// </summary>
 public class CurrencyRateService : ICurrencyRateService
 {

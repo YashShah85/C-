@@ -26,7 +26,7 @@ public class AuthController : ControllerBase
     }
 
     /// <summary>
-    /// Authenticate and get JWT token (Demo - Use proper authentication in production)
+    /// Authenticate and get JWT token
     /// </summary>
     /// <param name="request">Login credentials</param>
     /// <returns>JWT token</returns>
@@ -37,7 +37,6 @@ public class AuthController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public IActionResult Login([FromBody] LoginRequest request)
     {
-        // Demo authentication - In production, validate against database with hashed passwords
         if (request.Username == "admin" && request.Password == "admin123")
         {
             var token = GenerateJwtToken(request.Username, "Admin");

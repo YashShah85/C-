@@ -7,13 +7,12 @@ namespace CurrencyExchange.Infrastructure.ExternalServices;
 
 /// <summary>
 /// Service to fetch currency rates from Nationalbanken API
-/// Implements IExternalCurrencyService following Dependency Inversion Principle (DIP)
 /// </summary>
 public class NationalbankCurrencyService : IExternalCurrencyService
 {
     private readonly HttpClient _httpClient;
     private readonly ILogger<NationalbankCurrencyService> _logger;
-    private const string ApiUrl = "https://www.nationalbanken.dk/api/currencyratesxml?lang=da";
+    private const string ApiUrl = "https://www.nationalbanken.dk/api/currencyratesxml";
 
     public NationalbankCurrencyService(
         HttpClient httpClient,
@@ -100,7 +99,7 @@ public class NationalbankCurrencyService : IExternalCurrencyService
                     {
                         CurrencyCode = code,
                         CurrencyName = desc ?? code,
-                        RateToDKK = rate / 100, // Nationalbanken returns rate per 100 units
+                        RateToDKK = rate / 100,
                         FetchedAt = fetchedAt
                     };
 

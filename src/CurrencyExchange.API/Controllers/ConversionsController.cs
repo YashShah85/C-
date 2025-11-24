@@ -95,7 +95,6 @@ public class ConversionsController : ControllerBase
     {
         try
         {
-            // Validate date range
             if (startDate.HasValue && endDate.HasValue && startDate.Value > endDate.Value)
             {
                 return BadRequest(new { message = "Start date cannot be after end date" });
